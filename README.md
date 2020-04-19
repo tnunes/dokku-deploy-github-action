@@ -1,6 +1,6 @@
 # dokku-deploy-github-action
 
-This action makes deployment to Dokku as easy as possible!
+This action automates deployment to a dokku server.
 
 ## Inputs
 
@@ -14,9 +14,13 @@ The private ssh key used for Dokku deployments. Never use as plain text! Configu
 
 The user to use for ssh. If not specified, "dokku" user will be used.
 
-### dokku-host
+### dokku-hostname
 
-The Dokku host to deploy to.
+The Dokku host hostname name to deploy to.
+
+### dokku-hostport
+
+The Dokku host port to deploy to. If not specified, `22` is the default.
 
 ### app-name
 
@@ -50,9 +54,10 @@ steps:
         fetch-depth: 0
   - id: deploy
     name: Deploy to dokku
-    uses: idoberko2/dokku-deploy-github-action@v1
+    uses: tnunes/dokku-deploy-github-action@v1
     with:
         ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-        dokku-host: 'my-dokku-host.com'
-        app-name: 'my-dokku-app'
+        dokku-hostname: ${{ secrets.DOKKU_HOST_NAME }}
+        dokku-hostport: ${{ secrets.DOKKU_HOST_PORT }}
+        app-name: ${{ secrets.DOKKU_APP }}
 ```

@@ -12,9 +12,13 @@ inputs:
     description: "The user to use for ssh (Default: dokku)"
     required: false
     default: "dokku"
-  dokku-host:
-    description: "The dokku host to ssh into"
+  dokku-hostname:
+    description: "The dokku host name to ssh into"
     required: true
+  dokku-hostport:
+    description: "The dokku host port to ssh into"
+    required: false
+    default: "22"
   app-name:
     description: "The dokku app name"
     required: true
@@ -32,7 +36,8 @@ runs:
   args:
     - ${{ inputs.ssh-private-key }}
     - ${{ inputs.dokku-user }}
-    - ${{ inputs.dokku-host }}
+    - ${{ inputs.dokku-hostname }}
+    - ${{ inputs.dokku-hostport }}
     - ${{ inputs.app-name }}
     - ${{ inputs.remote-branch }}
     - ${{ inputs.git-push-flags }}
